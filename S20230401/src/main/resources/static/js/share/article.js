@@ -361,3 +361,15 @@ function reportCheck(report_id){
         throw error;
     });
 }
+
+// 이미지 에러 처리
+$(() => {
+    $('.article_content').find('img').error(e => {
+        $(e.target).closest('img').attr('src', `${contextPath}/image/ShareGo_Not_Found_Image.png`);
+    });
+    $('.board-toggle').click(e => {
+        let parent = $(e.target).closest('.board-summary');
+        let children = parent.find('.board-summary-part');
+        children.toggle();
+    });
+});

@@ -12,21 +12,21 @@
 <body>
 	<div class="container">
 		<!-- 사이드바 -->
-		<div class="message-sidebar">
+		<aside class="message-sidebar">
 			<div class="sidebar-menu">
-				<div class="menu-profile" style="border-bottom: 1px solid rgba(128, 128, 128, 0.5);">
+				<div class="menu-profile">
 					<img src="${pageContext.request.contextPath}/uploads/profile/${memberInfo.mem_image}" onerror="this.onerror=null; this.src='${pageContext.request.contextPath }/image/abstract-user.svg';">
 					<p>${memberInfo.mem_nickname}</p>
 				</div>
 				<div class="menu-item">
-					<button onclick="writebox()">쪽지 쓰기</button>
-					<button onclick="receivebox()">받은 쪽지함</button>
-					<button onclick="sentbox()">보낸 쪽지함</button>
-					<button onclick="storagebox()">쪽지 보관함</button>
-					<button onclick="recyclebox()">휴지통</button>
+					<button id="btns-writebox" onclick="writebox()">쪽지 쓰기</button>
+					<button id="btns-receivebox" onclick="receivebox()">받은 쪽지함</button>
+					<button id="btns-sentbox" onclick="sentbox()">보낸 쪽지함</button>
+					<button id="btns-storagebox" onclick="storagebox()">쪽지 보관함</button>
+					<button id="btns-recyclebox" onclick="recyclebox()">휴지통</button>
 				</div>				
 			</div>
-		</div>
+		</aside>
 		
 		<!-- 본문 -->
 		<div class="message-content">

@@ -1,4 +1,7 @@
 @charset "UTF-8";
+.message-sidebar{
+	background-color: #0193F8;
+}
 body {
 	font-family: Arial, sans-serif;
 	margin: 0;
@@ -21,7 +24,6 @@ body {
 }
 /* 프로필 영역 */
 .menu-profile {
-	background-color: #0193F8;
 	padding: 40px;
 	height: 100px;
 	width: auto;
@@ -47,18 +49,22 @@ body {
 /* 사이드바 버튼 */
 .menu-item button{
 	margin: 10px 0px;
-	padding: 10px 0px;z`
-	border-radius: 10px;
-	background-color: #3f7ab5;
+	padding: 10px 0px;
 	color: white;
+	background-color: transparent;
 	border: none;
 	font-size: 20px;
 	font-weight: bolder;
+	cursor: pointer;
+}
+.menu-item button:hover{
+	background-color: rgb(35, 161, 252);
 }
 .message-content {
 	flex: 1;
 	padding: 10px;
 }
+
 /* 두번째 자식 요소 제외 (받은 쪽지함) */
 .message-content > *:not(:nth-child(2)) {
 	display: none;
@@ -141,7 +147,4 @@ div.write-group:first-of-type {
 
 .list-content {
 	color: #555;
-}
-.menu-item button:hover{
-	background-color: #0193F8;
 }

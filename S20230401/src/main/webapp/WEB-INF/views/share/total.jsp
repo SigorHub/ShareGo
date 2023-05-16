@@ -8,170 +8,15 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/initializer.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/layout.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/share/total.js"></script>
 <link href="https://unpkg.com/sanitize.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/preference.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/presets.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/layout.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/share/total.css">
 
-<script type="text/javascript">
-	$(window).scroll(() => {
-		let scrollTop = $(window).scrollTop();
-		let header = $('header');
-		if (header != null) {
-			if (scrollTop > 21 && !header.hasClass('fix-header')) {
-				header.addClass('fix-header');
-			}
-			else if (scrollTop <= 21 && header.hasClass('fix-header')) {
-				header.removeClass('fix-header');
-			}
-		}
-	});
-	$(() => {
-		$('#scrollToTop').click(e => $(window).scrollTop(0));
-		$('#scrollToBottom').click(e => $(window).scrollTop($(document).height() - 1120));
-	});
-</script>
-<style type="text/css">
-	button{
-		width: auto;
-		height: 25px;
-		font-size:12px;
-		font-family: 'Nanum Gothic';
-		color: white;
-		text-align: center;
-		background: gray;
-		border: none;
-		border-radius: 14px;
-	}
-	.btn-cost{
-		width: auto;
-		height: 25px;
-		font-size:15px;
-		font-family: 'Nanum Gothic';
-		color: white;
-		text-align: center;
-		background: red;
-		border: none;
-		border-radius: 8px;
-	}
-	.btns-tag{
-		padding: 0px 2px;
-		background-color: transparent;
-		color: var(--subtheme);
-		font-weight: bold;
-		cursor: pointer;
-	}
-	.btns-tag::before{
-		content: '#';
-	}
-	
-	span.article-title > a:hover {
-		color: var(--subtheme);
-	}
-	
-	div.article-info:not(:last-child) {
-		border-bottom: 1px solid rgba(128, 128, 128, 0.5);
-	}
-	
-	/* Search style */
-	div.board-search > form svg {
-		fill: none;
-		stroke: var(--subtheme);
-		stroke-width: 64px;
-		stroke-linecap: round;
-		stroke-linejoin: round;
-		width: 20px;
-		height: 20px;
-		margin-right: 5px;
-	}
-	
-	div.board-search > form select {
-		outline: none;
-		border: 2.5px solid var(--subtheme);
-		border-width: 0 0 2.5px 0;
-		color: var(--subtheme);
-		font-weight: bolder;
-		background-color: transparent;
-	}
-	
-	div.board-search > form input[type="text"] {
-		outline: none;
-		border: 2.5px solid var(--subtheme);
-		border-width: 0 0 2.5px 0;
-		background-color: transparent;
-	}
-	
-	div.board-search > form button[type="submit"] {
-		outline: none;
-		border: 0;
-		background-color: var(--subtheme);
-		color: var(--subtheme-font);
-		font-size: 14px;
-		font-weight: bold;
-		cursor: pointer;
-		border-radius: 5px;
-	}
-	
-	/* Paging style */
-	div.board_paging {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-	}
-	button.paging-block, button.paging-page {
-		border-radius: 12px;
-		min-width: 24px;
-		height: 24px;
-		cursor: pointer;
-		padding: 0;
-		background-color: transparent;
-		border: 0;
-		outline: none;
-	}
-	button.paging-block *, button.paging-page * {
-		pointer-events: none;
-	}
-	button.paging-block {
-		width: 16px;
-		height: 16px;
-	}
-	button.paging-block > svg {
-		width: 50%;
-		height: 100%;
-		fill: none;
-		stroke: var(--subtheme);
-		cursor: default;
-		stroke-width: 64px;
-		stroke-linecap: round;
-		stroke-linejoin: round;
-	}
-	button.paging-block:disabled > svg {
-		stroke: rgba(var(--subtheme-rgb), 0.5);
-	}
-	button.paging-page {
-		color: var(--theme-font);
-		font-size: 16px;
-		font-weight: bolder;
-	}
-	button.paging-page > span {
-		color: inherit;
-		font-size: inherit;
-		font-weight: inherit;
-	}
-	button.paging-page:hover:not(:disabled) {
-		background-color: rgba(var(--theme-font-rgb), 0.25);
-	}
-	button.paging-block:disabled {
-		cursor: default;
-	}
-	button.paging-page:disabled {
-		color: var(--subtheme);
-		cursor: default;
-	}
-</style>
 </head>
 <body>
-
 	<main>
 		<div class="container padding-10px">
 			<div class="article-view">
@@ -253,7 +98,10 @@
 									</div>
 								</div>
 								<div class="view-middle display-flex justify-content-space-between align-items-center padding-5px padding-hor-0">
-									<span class="font-weight-bolder">${article.member.mem_nickname}</span>
+									<span>
+										<span class="font-weight-bolder">${article.member.mem_nickname}</span>
+										<span id="member_username" style="color: rgba(var(--theme-font-rgb), 0.5);">${article.member.mem_username}</span>
+									</span>
 									<div class="display-flex justify-content-flex-end align-items-center">
 									
  										<%-- <c:if test="${fn:contains(article.status_name, '모집')}"><button>${article.status_name}</button></c:if>
@@ -372,6 +220,7 @@
 						</svg>
 					</button>
 				</div>
+
 				<%-- <c:set var="params" value=""/>
 				<c:forEach var='test' items="${param }" varStatus="status">
 					<c:choose>
@@ -380,6 +229,7 @@
 					</c:choose>
 					<c:url var="params" value="${params}${test.key }=${test.value }"/>
 				</c:forEach> --%>
+				
 				<c:out value="${params }"/>
 			</div>
 		</div>

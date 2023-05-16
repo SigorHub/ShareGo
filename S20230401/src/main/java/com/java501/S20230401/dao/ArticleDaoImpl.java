@@ -1,25 +1,20 @@
 package com.java501.S20230401.dao;
 
-import java.lang.reflect.Field;
-import java.util.Arrays;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
-import com.java501.S20230401.model.Comm;
-import com.java501.S20230401.model.Join;
-import com.java501.S20230401.model.Region;
-import com.java501.S20230401.model.Reply;
 import com.java501.S20230401.model.Article;
 import com.java501.S20230401.model.ArticleMember;
+import com.java501.S20230401.model.Comm;
 import com.java501.S20230401.model.MemberInfo;
+import com.java501.S20230401.model.Region;
+import com.java501.S20230401.model.Reply;
 import com.java501.S20230401.util.SummaryType;
-import oracle.security.o3logon.a;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import oracle.security.o3logon.a;
 
 @Repository
 @RequiredArgsConstructor

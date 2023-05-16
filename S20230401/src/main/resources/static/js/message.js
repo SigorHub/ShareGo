@@ -10,6 +10,9 @@ function writebox(){
     document.querySelector('.content-sender').style.display = 'none';
     document.querySelector('.content-storage').style.display = 'none';
     document.querySelector('.content-recycle').style.display = 'none';
+    document.querySelector('#btns-writebox').style.backgroundColor = 'white';
+    document.querySelector('#btns-writebox').style.color = 'black';
+
 }
 // 받은 쪽지함
 function receivebox(){
