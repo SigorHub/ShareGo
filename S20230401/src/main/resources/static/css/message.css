@@ -60,6 +60,10 @@ body {
 .menu-item button:hover{
 	background-color: rgb(35, 161, 252);
 }
+.menu-item button:nth-child(2){
+	background-color: white;
+	color: black;
+}
 .message-content {
 	flex: 1;
 	padding: 10px;

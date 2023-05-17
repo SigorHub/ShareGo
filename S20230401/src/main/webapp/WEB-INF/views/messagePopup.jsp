@@ -7,7 +7,7 @@
 <title>쪽지함</title>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/message.css">
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/message.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/message.js" defer></script>
 </head>
 <body>
 	<div class="container">
@@ -19,11 +19,11 @@
 					<p>${memberInfo.mem_nickname}</p>
 				</div>
 				<div class="menu-item">
-					<button id="btns-writebox" onclick="writebox()">쪽지 쓰기</button>
-					<button id="btns-receivebox" onclick="receivebox()">받은 쪽지함</button>
-					<button id="btns-sentbox" onclick="sentbox()">보낸 쪽지함</button>
-					<button id="btns-storagebox" onclick="storagebox()">쪽지 보관함</button>
-					<button id="btns-recyclebox" onclick="recyclebox()">휴지통</button>
+					<button onclick="clickEvent(this, 'write')">쪽지 쓰기</button>
+					<button onclick="clickEvent(this, 'receiver')">받은 쪽지함</button>
+					<button onclick="clickEvent(this, 'sender')">보낸 쪽지함</button>
+					<button onclick="clickEvent(this, 'storage')">쪽지 보관함</button>
+					<button onclick="clickEvent(this, 'recycle')">휴지통</button>
 				</div>				
 			</div>
 		</aside>
