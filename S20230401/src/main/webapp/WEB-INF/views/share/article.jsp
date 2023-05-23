@@ -126,135 +126,137 @@
 					</div>
 					
 					<!-- 거래 관련 내용 -->
-					<div class="article-trade">
-						<div class="share-trdHeader display-flex justify-content-space-between align-items-center">
-							<span class="color-subtheme font-size-20px font-weight-bolder">${article.trade.trd_cost > 0 ? article.trade.trd_cost : '무료나눔'}</span>
-							<div class="display-flex justify-content-flex-end align-items-center">
-								<button class="btn" type="button">개시일 : <fmt:formatDate value="${article.art_regdate}" pattern="yy-MM-dd"/></button>
-								<span class="color-theme-font font-weight-bold margin-hor-2_5px" style="color: rgba(var(--theme-font-rgb), 0.5);">~</span>
-								<button>마감일 : <fmt:formatDate value="${article.trade.trd_enddate}" pattern="yy-MM-dd"/></button>
-							</div>
-						</div>
-						<div class="share-trdContent display-flex flex-direction-column justify-content-flex-start" style="border-bottom: 1px solid rgba(128, 128, 128, 0.5);">
-							<div class="display-flex justify-content-space-between align-items-center">
-								<span><span class="color-subtheme font-weight-bolder margin-right-5px">지역제한</span>${article.trade.region.reg_name == null ? '제한없음' : article.trade.region.reg_name}</span>
-								<span><span class="color-subtheme font-weight-bolder">상세장소</span>${article.trade.trd_loc}</span>
-							</div>
-							<div class="display-flex justify-content-space-between align-items-center">
-								<span><span class="color-subtheme font-weight-bolder margin-right-5px">최대 인원</span>${article.trade.trd_max}명</span>
-								<span><span class="color-subtheme font-weight-bolder margin-right-5px">최소 나이</span>${article.trade.trd_minage>0? article.trade.trd_minage:'제한없음' }</span>
-								<span><span class="color-subtheme font-weight-bolder margin-right-5px">최대 나이</span>${article.trade.trd_maxage>0? article.trade.trd_maxage:'제한없음'}</span>
-								<span><span class="color-subtheme font-weight-bolder margin-right-5px">성별 제한</span>${article.trade.trd_gender==201? '남자만':article.trade.trd_gender==202? '여자만':'제한없음'}</span>
-							</div>
-						</div>
-						
-						<!-- 참가중인 회원 목록 -->
-						<div class="share-userList">
-							<h2>거래 참가자 명단</h2><hr />
-							<c:forEach var="join" items="${joinList}">
-								<div class="userList-memberInfo">
-									<div class="user-profile-image-in-list">
-										<img src="${pageContext.request.contextPath}/uploads/profile/${join.member.mem_image}" onerror="this.onerror=null; this.src='${pageContext.request.contextPath }/image/abstract-user.svg';">
-									</div>
-									<div class="userList-details">
-										<div class="display-flex justify-content-flex-start align-items-center padding-0">
-											<h3 class="font-weight-bolder margin-0">${join.member.mem_nickname}</h3>
-											<span class="margin-left-10px" style="color: rgba(var(--theme-font-rgb), 0.5);"><span class="font-weight-bolder margin-right-5px" style="color: rgba(var(--subtheme-rgb), 0.5);">참여일</span><fmt:formatDate value="${join.join_date}" pattern="yy-MM-dd HH:mm:ss"/></span>
-										</div>
-										<div class="modal-report display-flex justify-content-flex-start align-items-center padding-0">
-											<span id="member_nickname" style="color: rgba(var(--theme-font-rgb), 0.5);">${join.member.mem_username}</span>
-											<c:if test="${not empty memberInfo}">
-												<svg id="member-report" viewBox="0 0 512 512" width="24" height="24" style="fill: none; stroke: var(--warning); stroke-width: 32px; stroke-linecap: round; stroke-linejoin: round; cursor: pointer;"><path d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z"/><path d="M250.26 166.05L256 288l5.73-121.95a5.74 5.74 0 00-5.79-6h0a5.74 5.74 0 00-5.68 6z"/><path d="M256 367.91a20 20 0 1120-20 20 20 0 01-20 20z" style="stroke: none; fill: var(--warning);"/></svg>
-											</c:if>
-											<input type="hidden" id="member_id" name="mem_id" value="${join.mem_id}">
-											<input type="hidden" id="memReport_id" value="${join.member.report_id}">
-										</div>
-									</div>
-									<div class="userList-btns">
-										<c:choose>
-											<c:when test="${article.mem_id == memberInfo.mem_id || memberInfo.mem_authority >= 108}">
-												<button class="btns-action adv-hover" id="btns-drop">추방</button>
-											</c:when>
-											<c:when test="${join.mem_id == memberInfo.mem_id || memberInfo.mem_authority >= 108}">
-												<button class="btns-action adv-hover" id="btns-joinCancel">취소</button>
-											</c:when>
-										</c:choose>
-									</div>
+					<c:if test="${not empty article.trade.trd_id}">
+						<div class="article-trade">
+							<div class="share-trdHeader display-flex justify-content-space-between align-items-center">
+								<span class="color-subtheme font-size-20px font-weight-bolder">${article.trade.trd_cost > 0 ? article.trade.trd_cost : '무료나눔'}</span>
+								<div class="display-flex justify-content-flex-end align-items-center">
+									<button class="btn" type="button">개시일 : <fmt:formatDate value="${article.art_regdate}" pattern="yy-MM-dd"/></button>
+									<span class="color-theme-font font-weight-bold margin-hor-2_5px" style="color: rgba(var(--theme-font-rgb), 0.5);">~</span>
+									<button>마감일 : <fmt:formatDate value="${article.trade.trd_enddate}" pattern="yy-MM-dd"/></button>
 								</div>
-								<hr />
-							</c:forEach>
-							<c:if test="${empty joinList}"><p style="text-align: center;">아직 참가자가 없어요</p></c:if>
-						</div>
-						
-						<!-- 거래 대기열 회원 목록 -->
-						<div class="share-userList">
-							<h2>거래 신청자 명단</h2><hr />
-							<c:forEach var="waiting" items="${waitingList}" varStatus="status">
-								<div class="userList-memberInfo">
-									<div class="user-profile-image-in-list">
-										<img src="${pageContext.request.contextPath}/uploads/profile/${waiting.member.mem_image}" onerror="this.onerror=null; this.src='${pageContext.request.contextPath }/image/abstract-user.svg';">
-									</div>
-									<div class="userList-details">
-										<div class="display-flex justify-content-flex-start align-items-center padding-0">
-											<h3 class="font-weight-bolder margin-0">${waiting.member.mem_nickname}</h3>
-											<span class="margin-left-10px" style="color: rgba(var(--theme-font-rgb), 0.5);"><span class="font-weight-bolder margin-right-5px" style="color: rgba(var(--subtheme-rgb), 0.5);">신청일</span><fmt:formatDate value="${waiting.wait_date}" pattern="yy-MM-dd HH:mm:ss"/></span>
+							</div>
+							<div class="share-trdContent display-flex flex-direction-column justify-content-flex-start" style="border-bottom: 1px solid rgba(128, 128, 128, 0.5);">
+								<div class="display-flex justify-content-space-between align-items-center">
+									<span><span class="color-subtheme font-weight-bolder margin-right-5px">지역제한</span>${article.trade.region.reg_name == null ? '제한없음' : article.trade.region.reg_name}</span>
+									<span><span class="color-subtheme font-weight-bolder">상세장소 </span>${article.trade.trd_loc}</span>
+								</div>
+								<div class="display-flex justify-content-space-between align-items-center">
+									<span><span class="color-subtheme font-weight-bolder margin-right-5px">최대 인원</span>${article.trade.trd_max}명</span>
+									<span><span class="color-subtheme font-weight-bolder margin-right-5px">최소 나이</span>${article.trade.trd_minage>0? article.trade.trd_minage:'제한없음' }</span>
+									<span><span class="color-subtheme font-weight-bolder margin-right-5px">최대 나이</span>${article.trade.trd_maxage>0? article.trade.trd_maxage:'제한없음'}</span>
+									<span><span class="color-subtheme font-weight-bolder margin-right-5px">성별 제한</span>${article.trade.trd_gender==201? '남자만':article.trade.trd_gender==202? '여자만':'제한없음'}</span>
+								</div>
+							</div>
+							
+							<!-- 참가중인 회원 목록 -->
+							<div class="share-userList">
+								<h2>거래 참가자 명단</h2><hr />
+								<c:forEach var="join" items="${joinList}">
+									<div class="userList-memberInfo">
+										<div class="user-profile-image-in-list">
+											<img src="${pageContext.request.contextPath}/uploads/profile/${join.member.mem_image}" onerror="this.onerror=null; this.src='${pageContext.request.contextPath }/image/abstract-user.svg';">
 										</div>
-										<div class="modal-report display-flex justify-content-flex-start align-items-center padding-0">
-											<span id="member_nickname" style="color: rgba(var(--theme-font-rgb), 0.5);">${waiting.member.mem_username}</span>
-											<c:if test="${not empty memberInfo}">
-												<svg id="member-report" viewBox="0 0 512 512" width="24" height="24" style="fill: none; stroke: var(--warning); stroke-width: 32px; stroke-linecap: round; stroke-linejoin: round; cursor: pointer;"><path d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z"/><path d="M250.26 166.05L256 288l5.73-121.95a5.74 5.74 0 00-5.79-6h0a5.74 5.74 0 00-5.68 6z"/><path d="M256 367.91a20 20 0 1120-20 20 20 0 01-20 20z" style="stroke: none; fill: var(--warning);"/></svg>
-											</c:if>
-											<input type="hidden" id="member_id" name="mem_id" value="${waiting.mem_id}">
-											<input type="hidden" id="memReport_id" value="${waiting.member.report_id}">
-										</div>
-									</div>
-									<div class="userList-btns">
-										<c:choose>
-											<c:when test="${article.mem_id == memberInfo.mem_id || memberInfo.mem_authority >= 108}">
-												<c:if test="${article.trade.trd_max ne joinList.size()}">
-													<button class="btns-action" id="btns-accept">승인</button>
+										<div class="userList-details">
+											<div class="display-flex justify-content-flex-start align-items-center padding-0">
+												<h3 class="font-weight-bolder margin-0">${join.member.mem_nickname}</h3>
+												<span class="margin-left-10px" style="color: rgba(var(--theme-font-rgb), 0.5);"><span class="font-weight-bolder margin-right-5px" style="color: rgba(var(--subtheme-rgb), 0.5);">참여일</span><fmt:formatDate value="${join.join_date}" pattern="yy-MM-dd HH:mm:ss"/></span>
+											</div>
+											<div class="modal-report display-flex justify-content-flex-start align-items-center padding-0">
+												<span id="member_nickname" style="color: rgba(var(--theme-font-rgb), 0.5);">${join.member.mem_username}</span>
+												<c:if test="${not empty memberInfo}">
+													<svg id="member-report" viewBox="0 0 512 512" width="24" height="24" style="fill: none; stroke: var(--warning); stroke-width: 32px; stroke-linecap: round; stroke-linejoin: round; cursor: pointer;"><path d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z"/><path d="M250.26 166.05L256 288l5.73-121.95a5.74 5.74 0 00-5.79-6h0a5.74 5.74 0 00-5.68 6z"/><path d="M256 367.91a20 20 0 1120-20 20 20 0 01-20 20z" style="stroke: none; fill: var(--warning);"/></svg>
 												</c:if>
-												<button class="btns-action" id="btns-refuse">거절</button>
+												<input type="hidden" id="member_id" name="mem_id" value="${join.mem_id}">
+												<input type="hidden" id="memReport_id" value="${join.member.report_id}">
+											</div>
+										</div>
+										<div class="userList-btns">
+											<c:choose>
+												<c:when test="${article.mem_id == memberInfo.mem_id || memberInfo.mem_authority >= 108}">
+													<button class="btns-action adv-hover" id="btns-drop">추방</button>
+												</c:when>
+												<c:when test="${join.mem_id == memberInfo.mem_id || memberInfo.mem_authority >= 108}">
+													<button class="btns-action adv-hover" id="btns-joinCancel">취소</button>
+												</c:when>
+											</c:choose>
+										</div>
+									</div>
+									<hr />
+								</c:forEach>
+								<c:if test="${empty joinList}"><p style="text-align: center;">아직 참가자가 없어요</p></c:if>
+							</div>
+							
+							<!-- 거래 대기열 회원 목록 -->
+							<div class="share-userList">
+								<h2>거래 신청자 명단</h2><hr />
+								<c:forEach var="waiting" items="${waitingList}" varStatus="status">
+									<div class="userList-memberInfo">
+										<div class="user-profile-image-in-list">
+											<img src="${pageContext.request.contextPath}/uploads/profile/${waiting.member.mem_image}" onerror="this.onerror=null; this.src='${pageContext.request.contextPath }/image/abstract-user.svg';">
+										</div>
+										<div class="userList-details">
+											<div class="display-flex justify-content-flex-start align-items-center padding-0">
+												<h3 class="font-weight-bolder margin-0">${waiting.member.mem_nickname}</h3>
+												<span class="margin-left-10px" style="color: rgba(var(--theme-font-rgb), 0.5);"><span class="font-weight-bolder margin-right-5px" style="color: rgba(var(--subtheme-rgb), 0.5);">신청일</span><fmt:formatDate value="${waiting.wait_date}" pattern="yy-MM-dd HH:mm:ss"/></span>
+											</div>
+											<div class="modal-report display-flex justify-content-flex-start align-items-center padding-0">
+												<span id="member_nickname" style="color: rgba(var(--theme-font-rgb), 0.5);">${waiting.member.mem_username}</span>
+												<c:if test="${not empty memberInfo}">
+													<svg id="member-report" viewBox="0 0 512 512" width="24" height="24" style="fill: none; stroke: var(--warning); stroke-width: 32px; stroke-linecap: round; stroke-linejoin: round; cursor: pointer;"><path d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z"/><path d="M250.26 166.05L256 288l5.73-121.95a5.74 5.74 0 00-5.79-6h0a5.74 5.74 0 00-5.68 6z"/><path d="M256 367.91a20 20 0 1120-20 20 20 0 01-20 20z" style="stroke: none; fill: var(--warning);"/></svg>
+												</c:if>
+												<input type="hidden" id="member_id" name="mem_id" value="${waiting.mem_id}">
+												<input type="hidden" id="memReport_id" value="${waiting.member.report_id}">
+											</div>
+										</div>
+										<div class="userList-btns">
+											<c:choose>
+												<c:when test="${article.mem_id == memberInfo.mem_id || memberInfo.mem_authority >= 108}">
+													<c:if test="${article.trade.trd_max ne joinList.size()}">
+														<button class="btns-action" id="btns-accept">승인</button>
+													</c:if>
+													<button class="btns-action" id="btns-refuse">거절</button>
+												</c:when>
+												<c:when test="${waiting.mem_id == memberInfo.mem_id || memberInfo.mem_authority >= 108}">
+													<button class="btns-action" id="btns-waitCancel">취소</button>
+												</c:when>
+											</c:choose>
+										</div>
+									</div><hr />
+								</c:forEach>
+								<c:if test="${empty waitingList && empty joinList}"><p style="text-align: center;">아직 신청자가 없어요</p></c:if>
+							</div>
+							
+							<!-- 거래 신청, 찜 -->
+							<div class="share-btns">
+								<c:if test="${memberInfo != null}">
+								<!-- 찜 버튼 -->
+									<div class="btns-favorite">
+										<c:choose>
+											<c:when test="${userFavorite > 0}">
+												<button class="btns-action" id="btns-favoriteDel">찜 취소</button>
 											</c:when>
-											<c:when test="${waiting.mem_id == memberInfo.mem_id || memberInfo.mem_authority >= 108}">
-												<button class="btns-action" id="btns-waitCancel">취소</button>
+											<c:when test="${userFavorite == 0}">
+												<button class="btns-action" id="btns-favorite">찜</button>
 											</c:when>
 										</c:choose>
 									</div>
-								</div><hr />
-							</c:forEach>
-							<c:if test="${empty waitingList && empty joinList}"><p style="text-align: center;">아직 신청자가 없어요</p></c:if>
+								<!-- 거래 버튼 -->
+									<div class="btns-trade">
+										<c:choose>
+											<c:when test="${userWaiting == 0 && userJoin == 0 && joinList.size() < article.trade.trd_max && article.trade.trd_status == 401}">
+												<button class="btns-action" id="btns-apply">신청</button>
+											</c:when>
+											<c:when test="${joinList.size() == article.trade.trd_max || article.trade.trd_status > 401}">
+												<button class="btns-action" id="btns-end">모집 완료</button>
+											</c:when>
+										</c:choose>
+									</div>
+								</c:if>
+								<c:if test="${memberInfo == null}"><div class="login display-flex justify-content-center align-items-center"><a href="${pageContext.request.contextPath}/login"><h3 class="color-subtheme">로그인</h3></a><span> 후 이용 가능합니다</span></div></c:if>
+							</div>
 						</div>
-						
-						<!-- 거래 신청, 찜 -->
-						<div class="share-btns">
-							<c:if test="${memberInfo != null}">
-							<!-- 찜 버튼 -->
-								<div class="btns-favorite">
-									<c:choose>
-										<c:when test="${userFavorite > 0}">
-											<button class="btns-action" id="btns-favoriteDel">찜 취소</button>
-										</c:when>
-										<c:when test="${userFavorite == 0}">
-											<button class="btns-action" id="btns-favorite">찜</button>
-										</c:when>
-									</c:choose>
-								</div>
-							<!-- 거래 버튼 -->
-								<div class="btns-trade">
-									<c:choose>
-										<c:when test="${userWaiting == 0 && userJoin == 0 && joinList.size() < article.trade.trd_max && article.trade.trd_status == 401}">
-											<button class="btns-action" id="btns-apply">신청</button>
-										</c:when>
-										<c:when test="${joinList.size() == article.trade.trd_max || article.trade.trd_status > 401}">
-											<button class="btns-action" id="btns-end">모집 완료</button>
-										</c:when>
-									</c:choose>
-								</div>
-							</c:if>
-							<c:if test="${memberInfo == null}"><div class="login display-flex justify-content-center align-items-center"><a href="${pageContext.request.contextPath}/login"><h3 class="color-subtheme">로그인</h3></a><span> 후 이용 가능합니다</span></div></c:if>
-						</div>
-					</div>
+					</c:if>
 				</div>
 				
 				<div class="article-body" style="border-bottom: 1px solid rgba(128, 128, 128, 0.5);">

@@ -19,6 +19,7 @@ import com.java501.S20230401.service.MessageService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+// 양동균
 @Controller
 @RequiredArgsConstructor
 @Slf4j

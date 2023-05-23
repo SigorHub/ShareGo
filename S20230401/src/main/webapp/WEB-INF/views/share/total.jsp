@@ -23,6 +23,10 @@
 				<div class="board-title margin-50px margin-hor-0" align="center" style="border: 1px solid transparent; border-radius: 20px; background-color: rgba(var(--subtheme-rgb), 0.25)">
 					<h1 class="color-subtheme text-align-left padding-10px padding-hor-20px">${boardName} 게시판</h1>
 					<p class="translucent-theme-font text-align-left padding-10px padding-hor-20px" style="padding-top: 0;">사용하지 않는 물건들을 다른 사람과 나눠보세요</p>
+					<c:forEach var="name" items="${shareName}">
+					${name.boardName}
+					${name.categoryName}
+					</c:forEach>
 				</div>
 				
 				<div class="display-flex justify-content-flex-end align-items-center"><span class="font-size-14px" style="color: rgba(var(--theme-font-rgb), 0.5);">총 ${totalArt }개의 게시글이 있습니다</span></div>

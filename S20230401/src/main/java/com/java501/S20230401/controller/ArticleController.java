@@ -6,14 +6,11 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -23,11 +20,9 @@ import org.json.JSONObject;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -69,7 +64,7 @@ public class ArticleController {
 		}
 	}
 	
-	@GetMapping(value = "/board/{boardName}/write")
+	//@GetMapping(value = "/board/{boardName}/write")
 	public String writeArticle(@PathVariable String boardName, @RequestParam(required = false) Integer brd_id,
 							   @RequestParam(required = false) Integer pageNum,
 							   @AuthenticationPrincipal MemberDetails memberDetails,
@@ -96,6 +91,8 @@ public class ArticleController {
 		return "writeArticleForm";
 	}
 	
+	
+	// 이미지 업로드
 	@ResponseBody
 	@PostMapping(value = "/board/{boardName}/imageUpload", produces = "application/text; charset=UTF-8")
 	public void imageUploadInArticle(@PathVariable String boardName, HttpServletResponse response,
@@ -145,7 +142,7 @@ public class ArticleController {
 		}
 	}
 
-	@PostMapping(value = "/board/{boardName}/writeProc")
+	//@PostMapping(value = "/board/{boardName}/writeProc")
 	public String writeArticleProcess(Article article, @RequestParam int brd_idLink,
 									  @PathVariable String boardName,
 									  String articleEditor,
@@ -155,7 +152,7 @@ public class ArticleController {
 		return "redirect:/board/" + boardName + "?brd_id=" + brd_idLink;
 	}
 	
-	@GetMapping(value = "/board/{boardName}/{art_id}")
+	//@GetMapping(value = "/board/{boardName}/{art_id}")
 	public String viewArticle(@AuthenticationPrincipal MemberDetails memberDetails,
 							  @PathVariable String boardName,
 							  @PathVariable int art_id, @RequestParam int brd_id,
@@ -215,7 +212,7 @@ public class ArticleController {
 	}
 	
 	@ResponseBody
-	@PostMapping(value = "/board/{boardName}/{art_id}/recommend")
+	//@PostMapping(value = "/board/{boardName}/{art_id}/recommend")
 	public String recommend(@AuthenticationPrincipal MemberDetails memberDetails,
 							@PathVariable String boardName,
 							@PathVariable int art_id,
@@ -270,7 +267,7 @@ public class ArticleController {
 		return jsonObj.toString();
 	}
 	
-	@PostMapping(value = "/board/{boardName}/{art_id}/replies")
+	//@PostMapping(value = "/board/{boardName}/{art_id}/replies")
 	public String viewReply(@AuthenticationPrincipal MemberDetails memberDetails,
 			  				@PathVariable String boardName,
 			  				@PathVariable int art_id,
@@ -287,7 +284,7 @@ public class ArticleController {
 	}
 	
 	@ResponseBody
-	@PostMapping(value = "/board/{boardName}/{art_id}/replyWrite")
+	//@PostMapping(value = "/board/{boardName}/{art_id}/replyWrite")
 	public String writeReply(@AuthenticationPrincipal MemberDetails memberDetails,
 			  				 @PathVariable String boardName,
 							 @PathVariable int art_id,

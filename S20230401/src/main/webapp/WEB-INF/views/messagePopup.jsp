@@ -56,7 +56,7 @@
 		<!--받은 쪽지함 -->
 			<div class="content-receiver">
 				<h2>받은 쪽지함</h2>
-				<div class="content-message">
+				<div class="message-box">
 					<c:forEach var="message" items="${messageListRec}">
 						<c:if test="${message.mes_status == 301}">
 							<div class="message-list" id="list-receiver" ${message.mes_isread == 1? 'style="background-color: rgba(0, 0, 0, 0.1);"':''}>
@@ -83,7 +83,7 @@
 		<!--쪽지 보관함 -->
 			<div class="content-storage">
 				<h2>쪽지 보관함</h2>
-				<div class="content-message">
+				<div class="message-box">
 					<c:forEach var="message" items="${messageListRec}">
 						<c:if test="${message.mes_status == 302}">
 							<div class="message-list" ${message.mes_isread == 1? 'style="background-color: rgba(0, 0, 0, 0.1);"':''}>
@@ -91,7 +91,7 @@
 								<input type="hidden" name="mem_receiver_id" value="${message.mem_sender_id}"> <!-- 발신자 고유번호 -->
 								<input type="hidden" name="mem_receiver_id" value="${message.mem_receiver_id}"> <!-- 수신자 고유번호 -->
 								<div class="list-title">
-									<span>${message.member.mem_nickname}</span>
+									<span>${message.member.mem_username}<br>[${message.member.mem_nickname}]</span>
 									<span>${message.mes_title}</span>
 									<span><fmt:formatDate value="${message.mes_regdate}" pattern="yy.MM.dd [HH:mm]"/></span>
 								</div>
@@ -108,7 +108,7 @@
 		<!-- 휴지통 -->
 			<div class="content-recycle">
 				<h2>휴지통</h2>
-				<div class="content-message">
+				<div class="message-box">
 					<c:forEach var="message" items="${messageListRec}">
 						<c:if test="${message.mes_status == 303}">
 							<div class="message-list" ${message.mes_isread == 1? 'style="background-color: rgba(0, 0, 0, 0.1);"':''}>
@@ -116,7 +116,7 @@
 								<input type="hidden" name="mem_receiver_id" value="${message.mem_sender_id}"> <!-- 발신자 고유번호 -->
 								<input type="hidden" name="mem_receiver_id" value="${message.mem_receiver_id}"> <!-- 수신자 고유번호 -->
 								<div class="list-title">
-									<span>${message.member.mem_nickname}</span>
+									<span>${message.member.mem_username}<br>[${message.member.mem_nickname}]</span>
 									<span>${message.mes_title}</span>
 									<span><fmt:formatDate value="${message.mes_regdate}" pattern="yy.MM.dd [HH:mm]"/></span>
 								</div>
@@ -133,14 +133,14 @@
 		<!-- 보낸 쪽지함 -->
 			<div class="content-sender">
 				<h2>보낸 쪽지함</h2>
-				<div class="content-message">
+				<div class="message-box">
 					<c:forEach var="message" items="${messageListSen}">
 						<div class="message-list" ${message.mes_isread == 1? 'style="background-color: rgba(0, 0, 0, 0.1);"':''}>
 							<input type="hidden" name="mes_id" value="${message.mes_id}"> <!-- 쪽지번호 -->
 							<input type="hidden" name="mem_receiver_id" value="${message.mem_sender_id}"> <!-- 발신자 고유번호 -->
 							<input type="hidden" name="mem_receiver_id" value="${message.mem_receiver_id}"> <!-- 수신자 고유번호 -->
 							<div class="list-title">
-								<span>${message.member.mem_nickname}</span>
+								<span>${message.member.mem_username}<br>[${message.member.mem_nickname}]</span>
 								<span>${message.mes_title}</span>
 								<span><fmt:formatDate value="${message.mes_regdate}" pattern="yy.MM.dd [HH:mm]"/></span>
 							</div>
