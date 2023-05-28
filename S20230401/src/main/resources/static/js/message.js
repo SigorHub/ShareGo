@@ -38,6 +38,14 @@ function clickEvent(btn, box){
     previousContent = content;
 }
 
+// 답장
+function messageReply(receiver_id, sender_id){
+    clickEvent(document.querySelector('.menu-item button:nth-child(1)'), 'write')
+    document.querySelector('#mem_username').setAttribute('value', sender_id);
+    document.querySelector('#mem_receiver_id').setAttribute('value', receiver_id);
+    $('#mem_username').trigger('input');
+}
+
 /*
 switch(box){
     case 'write':
@@ -123,13 +131,7 @@ $(()=>{
     });
 });
 
-// 답장
-function messageReply(receiver_id, sender_id){
-    writebox();
-    document.querySelector('#mem_username').setAttribute('value', sender_id);
-    document.querySelector('#mem_receiver_id').setAttribute('value', receiver_id);
-    $('#mem_username').trigger('input');
-}
+
 
 
 // 삭제
