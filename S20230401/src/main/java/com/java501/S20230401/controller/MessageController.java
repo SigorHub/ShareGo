@@ -80,6 +80,9 @@ public class MessageController {
 		}else if(action.equals("recycle")) {
 			message.setMes_status(303);
 			result = messageService.dgMessageAction(message);
+		}else if(action.equals("restore")) {
+			message.setMes_status(301);
+			result = messageService.dgMessageAction(message);
 		}else if(action.equals("delete")) {
 			result = messageService.dgMessageDelete(message);
 		}else if(action.equals("read")) {

@@ -134,7 +134,7 @@ $(()=>{
 
 
 
-// 삭제
+// 버튼 이벤트 (보관, 휴지통, 삭제, 복원)
 function messageAction(action, mes_id, mem_sender_id, mem_receiver_id){
     if(action == 'storage'){
         confirmMessage = '보관 하시겠습니까?';
@@ -145,6 +145,9 @@ function messageAction(action, mes_id, mem_sender_id, mem_receiver_id){
     }else if(action == 'delete'){
         confirmMessage = '삭제 하시겠습니까?';
         successMessage = '삭제 되었습니다.';
+    }else if(action == 'restore'){
+    	confirmMessage = '복원 하시겠습니까?';
+    	successMessage = '받은 쪽지함으로 이동 되었습니다.';
     }
     if(confirm(confirmMessage)){
         $.ajax({
