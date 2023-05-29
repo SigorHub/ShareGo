@@ -28,7 +28,7 @@
 			</div>
 		</aside>
 		
-		<!-- 본문 -->
+		<!-- 본문 시작 -->
 		<div class="message-content">
 		<!-- 쪽지 작성 -->
 			<div class="content-write">
