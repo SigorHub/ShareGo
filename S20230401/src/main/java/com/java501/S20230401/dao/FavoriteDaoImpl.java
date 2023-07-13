@@ -13,18 +13,6 @@ import lombok.RequiredArgsConstructor;
 public class FavoriteDaoImpl implements FavoriteDao {
 
 	private final SqlSession session;
-	@Override
-	public int cyFavorite(Favorite favorite) {
-		System.out.println("관심 다오 임플");
-		int result = 0;
-		try {
-			result = session.insert("cyFavorite", favorite);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return result;
-	}
-	
 	
 	// 양동균
 	// 찜목록 조회
@@ -61,6 +49,10 @@ public class FavoriteDaoImpl implements FavoriteDao {
 		return result;
 	}
 	
+	
+	
+	
+	
 	//김진현
 	@Override
 	public void JHfavoriteInsert2(Article article) {
@@ -72,4 +64,20 @@ public class FavoriteDaoImpl implements FavoriteDao {
 		return session.selectOne("JHFavoriteInsertYN",article);
 	}
 
+	
+	
+	
+	
+	// 김찬영
+	@Override
+	public int cyFavorite(Favorite favorite) {
+		System.out.println("관심 다오 임플");
+		int result = 0;
+		try {
+			result = session.insert("cyFavorite", favorite);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 }

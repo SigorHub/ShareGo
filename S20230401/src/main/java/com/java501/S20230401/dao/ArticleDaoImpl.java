@@ -18,7 +18,6 @@ import lombok.extern.slf4j.Slf4j;
 
 @Repository
 @RequiredArgsConstructor
-@Slf4j
 public class ArticleDaoImpl implements ArticleDao {
 	private final SqlSession session;
 	

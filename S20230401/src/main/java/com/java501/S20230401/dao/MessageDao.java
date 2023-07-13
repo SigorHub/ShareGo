@@ -6,7 +6,6 @@ import com.java501.S20230401.model.Message;
 
 
 public interface MessageDao {
-
 	// 양동균
 	List<Message> dgMessageListRec(Integer mem_id); // 받은 쪽지
 	List<Message> dgMessageListSen(Integer mem_id); // 보낸 쪽지

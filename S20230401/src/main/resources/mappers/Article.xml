@@ -47,6 +47,25 @@
 							  LEFT OUTER JOIN MEMBER M ON (A.MEM_ID = M.MEM_ID)
 		WHERE A.ART_ID = #{art_id} AND A.BRD_ID = #{brd_id}
 	</select>
+	<update id="hgIncreaseReadCount" parameterType="Article">
+		UPDATE ARTICLE SET ART_READ = ART_READ + 1
+		WHERE ART_ID = #{art_id} AND BRD_ID = #{brd_id}
+	</update>
+	<update id="hgRecommendArticle" parameterType="Article">
+		UPDATE ARTICLE SET ART_GOOD = ART_GOOD + #{art_good},
+						   ART_BAD = ART_BAD + #{art_bad}
+		WHERE ART_ID = #{art_id} AND BRD_ID = #{brd_id}
+	</update>
+	<select id="hgGetCountAllArticle" resultType="int">
+		SELECT COUNT(*) FROM ARTICLE
+	</select>
+	<select id="hgGetArticles" parameterType="Article" resultType="Article">
+		SELECT *
+		FROM (SELECT ROWNUM RN, A.*
+				 FROM (SELECT * FROM ARTICLE ORDER BY ART_REGDATE) A)
+		WHERE RN BETWEEN #{start} AND #{end}
+	</select>
+	
 	
 		<select id="hgAdminArticleList" parameterType="Article" resultType="Article">
 		SELECT  *
@@ -88,24 +107,7 @@
 		                 ORDER BY   ART_REGDATE DESC) J)
 		WHERE 	RN BETWEEN #{start} and #{end}
 	</select>
-	<update id="hgIncreaseReadCount" parameterType="Article">
-		UPDATE ARTICLE SET ART_READ = ART_READ + 1
-		WHERE ART_ID = #{art_id} AND BRD_ID = #{brd_id}
-	</update>
-	<update id="hgRecommendArticle" parameterType="Article">
-		UPDATE ARTICLE SET ART_GOOD = ART_GOOD + #{art_good},
-						   ART_BAD = ART_BAD + #{art_bad}
-		WHERE ART_ID = #{art_id} AND BRD_ID = #{brd_id}
-	</update>
-	<select id="hgGetCountAllArticle" resultType="int">
-		SELECT COUNT(*) FROM ARTICLE
-	</select>
-	<select id="hgGetArticles" parameterType="Article" resultType="Article">
-		SELECT *
-		FROM (SELECT ROWNUM RN, A.*
-				 FROM (SELECT * FROM ARTICLE ORDER BY ART_REGDATE) A)
-		WHERE RN BETWEEN #{start} AND #{end}
-	</select>
+
 	
 	<!-- 양동균 -->
 	<resultMap type="Article" id="dgArticleMap">

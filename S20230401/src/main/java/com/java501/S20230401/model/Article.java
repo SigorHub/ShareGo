@@ -6,22 +6,6 @@ import lombok.Data;
 
 @Data
 public class Article {
-	public String getKeyword() {
-		return keyword;
-	}
-	public void setKeyword(String keyword) {
-		this.keyword = keyword;
-	}
-	
-	
-	public String getKeyWord() {
-		return keyWord;
-	}
-	public void setKeyWord(String keyWord) {
-		this.keyWord = keyWord;
-	}
-
-
 	private Integer art_id;			// PK
 	private Integer brd_id;			// PK
 	private Integer mem_id;			// FK
@@ -66,10 +50,6 @@ public class Article {
 	private String		bjKeyword;	
 	private Integer		mem_authority;	
 	
-//	private String		bjStitle;	
-//	private String		bjScontent;	
-//	private String		bjStiCon;	
-//	private String		bjSnick;	
 	
 	// 임동빈
 	// COMM
@@ -116,7 +96,6 @@ public class Article {
 	private Integer 	reg_parent;
 	
 	// Report
-	
 	private String 	report_content;
 	private Date 	report_date;
 	private Integer report_status;
@@ -138,6 +117,22 @@ public class Article {
 	private Integer		insert_result;
 	private Integer		reg_id1;
 	private Integer     reg_id2;
+	
+	// 세터 게터
+	public String getKeyword() {
+		return keyword;
+	}
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+	
+	
+	public String getKeyWord() {
+		return keyWord;
+	}
+	public void setKeyWord(String keyWord) {
+		this.keyWord = keyWord;
+	}
 	
 	// 김찬영
 	//조회용(강의내용)
